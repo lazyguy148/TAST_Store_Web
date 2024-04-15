@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAST STORE</title>
+    <meta name="keywords" content="Áo thun nam, Áo thun nữ, Quần nam, Quần nữ, Áo unisex" />
+    <meta name="description" content="Website chuyên bán quần áo nam lẫn nữ - TAST" />
+    <meta name="copyright" content="TAST Store" />
+    <meta name="author" content="TAST Store" />
+    <link rel="shortcut icon" href="~/images/tast-logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <a href="trang-chu"><img src="~/images/tast-logo.png" width="500" height="100" /></a>
+            </div>
+
+            <div class="container">
+                @await Html.PartialAsync("_MenuPartial")
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="content">
+        <div class="container">
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+            <div class="col-md-3">
+                @await Html.PartialAsync("_BlogPartial")
+                <div class="panel panel-success panel-post">
+                    <div class="panel-heading panel-heading-prod">
+                        <i class="fa fa-paper-plane"></i> Quảng cáo
+                    </div>
+                    <div class="panel-body panel-body-post">
+                        <img src="~/images/ambatukam.jpg" class="img-rounded img-adv" alt="Quảng cáo" />
+                        <marquee>Sản phẩm độc quyền-Nhân dịp cửa hàng khai trương!!!</marquee>
+                    </div>
+                </div>
+                <div class="youtube">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/bD9RSh7i8-8" title="YouTubevideo player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4206985418705!2d106.78253487570396!3d10.855572157727538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276e7ea103df%3A0xb6cf10bb7d719327!2zSFVURUNIIC0gxJDhuqFpIGjhu41jIEPDtG5nIG5naOG7hyBUUC5IQ00gKFRodSBEdWMgQ2FtcHVzKQ!5e0!3m2!1svi!2s!4v1710172843840!5m2!1svi!2s" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer">
+        <div class="container container-footer">
+            <div class="col-md-9">
+                <h4>TAST_Store Thời trang nam và nữ</h4>
+                <p>Địa chỉ: Đối diện chung cư The East Gate, phường Đông Hòa, Dĩ An, Bình Dương</p>
+                <p>SĐT: <a class="info" href="tel:xxx">xxx</a>0902461509</p>
+                <p>Email: <a class="info" href="mailto: thuatlongan123@gmail.com">thuatlongan123@gmail.com</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><img src="~/images/fb.png" width="50" height="50"/><a href="https://www.facebook.com/">Facebook</a></p>
+                <p><img src="~/images/toptop.png" width="50" height="50" /><a href="https://www.tiktok.com/en/">Tiktok</a></p>
+                <p><img src="~/images/diutup.png" width="50" height="50" /><a href="https://www.youtube.com/">Youtube</a></p>
+            </div>
+        </div>
+    </div>
+
+    
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+</body>
+</html>

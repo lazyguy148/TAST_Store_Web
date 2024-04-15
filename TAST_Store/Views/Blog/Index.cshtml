@@ -1,0 +1,36 @@
+﻿@model TAST_Store.ViewModels.BlogViewModel
+<div class="panel panel-primary">
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Tất cả bài viết gần đây
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            @foreach (var item in Model.Blogs)
+            {
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="@item.Img" class="img-rounded"
+                             alt="@item.Title">
+                        <div class="caption">
+                            <h4>@item.Title</h4>
+                            <h4>@item.Detail</h4>
+                            <p>
+                                <a href="bai-viet/@item.Link-@item.IdBlog" class="btn
+btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="panel-footer text-center">
+        <ul class="pagination pagination-centered">
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+        </ul>
+    </div>
+</div>
