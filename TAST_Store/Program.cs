@@ -15,6 +15,7 @@ AddCookie(options =>
     options.Cookie.Name = "PetStoreCookie";
     options.LoginPath = "/User/Login";
 });
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +34,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.UseEndpoints(endpoints =>
 {
@@ -57,6 +60,11 @@ app.UseEndpoints(endpoints =>
     defaults: new { controller = "User", action = "Login" });
 
     endpoints.MapControllerRoute(
+     name: "them-gio-hang",
+     pattern: "them-gio-hang",
+     defaults: new { controller = "Cart", action = "AddItem" });
+
+    endpoints.MapControllerRoute(
     name: "thong-tin",
     pattern: "thong-tin",
     defaults: new { controller = "User", action = "Info" });
@@ -65,6 +73,13 @@ app.UseEndpoints(endpoints =>
      name: "dang-xuat",
      pattern: "dang-xuat",
      defaults: new { controller = "User", action = "Logout" });
+
+    endpoints.MapControllerRoute(
+     name: "gio-hang",
+     pattern: "gio-hang",
+     defaults: new { controller = "Cart", action = "Index" });
+
+    
 
     endpoints.MapControllerRoute(
     name: "bai-viet",
@@ -82,14 +97,21 @@ app.UseEndpoints(endpoints =>
     defaults: new { controller = "Contact", action = "Index" });
 
     endpoints.MapControllerRoute(
-   name: "the-loai-san-pham",
-   pattern: "{slug}-{id}",
-   defaults: new { controller = "Product", action = "CateProd" });
+    name: "xoa-san-pham",
+    pattern: "xoa-san-pham",
+    defaults: new { controller = "Cart", action = "Delete" });
+
+    endpoints.MapControllerRoute(
+       name: "the-loai-san-pham",
+       pattern: "{slug}-{id}",
+       defaults: new { controller = "Product", action = "CateProd" });
 
     endpoints.MapControllerRoute(
     name: "chi-tiet-san-pham",
     pattern: "san-pham/{slug}-{id}",
     defaults: new { controller = "Product", action = "ProdDetail" });
+
+    
 
     endpoints.MapControllerRoute(
     name: "chuong-trinh",
