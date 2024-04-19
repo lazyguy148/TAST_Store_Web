@@ -107,6 +107,28 @@ namespace TAST_Store.Controllers
                 status = true
             });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Payment(string name)
+        {
+            var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
+           m.Order).ToListAsync();
+            var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
+           m.Order).Take(2).ToListAsync();
+            var cart = HttpContext.Session.GetString(CartSession);
+            var list = new List<CartItem>();
+            if (!string.IsNullOrEmpty(cart))
+            {
+                list = JsonConvert.DeserializeObject<List<CartItem>>(cart);
+            }
+            var cartViewModel = new CartViewModel
+            {
+                Menus = menus,
+                Blogs = blogs,
+                CartItems = list
+            };
+            return View(cartViewModel);
+        }
     }
 }
 

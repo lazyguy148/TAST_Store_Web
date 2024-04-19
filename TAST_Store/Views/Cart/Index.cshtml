@@ -36,7 +36,7 @@
                                 @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
                                          "{0:c}", item.Product.Price.GetValueOrDefault(0) * item.Quantity)
                             </td>
-                            <td><a href="#" data-id="@item.Product.IdPro" class="btn-delete">Xoá</a></td>
+                            <td><button id="btnDelete" class="btn btn-danger" asp-controller="Cart" asp-action="Delete(@item.Product.IdPro)">Xoá</button></td>
                         </tr>
                     }
                 </tbody>
@@ -57,7 +57,76 @@
         }
     </div>
 </div>
-
+<script>
+    function handleContinueClick() {
+        window.location.href = "/san-pham";
+    }
+    document.getElementById("btnContinue").addEventListener("click", handleContinueClick);
+</script>
+<script>
+    function UpdateClick() {
+        var listProduct = $('.txtQuantity');
+        var cartList = [];
+        $.each(listProduct, function (i, item) {
+            cartList.push({
+                Quantity: $(item).val(),
+                Product: {
+                    IdPro: $(item).data('id')
+                }
+            });
+        });
+        $.ajax({
+            url: '/Cart/Update',
+            data: { cartModel: JSON.stringify(cartList) },
+            dataType: 'json',
+            type: 'POST',
+            success: function (res) {
+                if (res.status == true) {
+                    window.location.href = "/gio-hang";
+                }
+            }
+        })
+    }
+    document.getElementById("btnUpdate").addEventListener("click", UpdateClick);
+</script>
+<script>
+    function DelateAllClick() {
+        $.ajax({
+            url: '/Cart/DeleteAll',
+            dataType: 'json',
+            type: 'POST',
+            success: function (res) {
+                if (res.status == true) {
+                    window.location.href = "/gio-hang";
+                }
+            }
+        })
+    }
+    document.getElementById("btnDeleteAll").addEventListener("click", DelateAllClick);
+</script>
+<script>
+    function DeleteOneClick(e) {
+        e.preventDefault();
+        $.ajax({
+            data: { id: $(this).data('id') },
+            url: '/Cart/Delete',
+            dataType: 'json',
+            type: 'POST',
+            success: function (res) {
+                if (res.status == true) {
+                    window.location.href = "/gio-hang";
+                }
+            }
+        })
+    }
+    document.getElementById("btnDelete").addEventListener("click", DeleteOneClick);
+</script>
+<script>
+    function PaymentClick() {
+        window.location.href = "/thanh-toan";
+    }
+    document.getElementById("btnPayment").addEventListener("click", PaymentClick);
+</script>
 @section scripts {
     <script src="~/js/cart.js"></script>
 }

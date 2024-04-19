@@ -4,6 +4,7 @@
     },
     regEvents: function () {
         $('#btnContinue').off('click').on('click', function () {
+            console.log("Continue");
             window.location.href = "/san-pham";
         });
         $('#btnPayment').off('click').on('click', function () {
