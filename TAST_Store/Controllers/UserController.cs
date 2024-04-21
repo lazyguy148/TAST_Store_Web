@@ -110,8 +110,11 @@ namespace TAST_Store.Controllers
                     };
                     await HttpContext.SignInAsync(
                     CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    authProperties);
+                    new ClaimsPrincipal(claimsIdentity), authProperties);
+                    if(user.Permission == 1)
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else

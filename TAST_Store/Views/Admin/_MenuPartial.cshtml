@@ -1,0 +1,50 @@
+﻿@using System.Security.Claims
+@model TAST_Store.ViewModels.AdminViewModels
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data
+                    target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Quản lý sản phẩm</a></li>
+                <li><a href="#">Quản lý tài khoản</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    string username = User.Identity.Name;
+                    <li>
+                        <a href="thong-tin">
+                            <span class="glyphicon glyphicon-user"></span>
+                            @username
+                        </a>
+                    </li>
+                    <li><a href="dang-xuat"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                }
+                else
+                {
+                    <li>
+                        <a href="dang-ky">
+                            <span class="glyphicon glyphicon-user"></span> Đăng
+                            ký
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dang-nhap">
+                            <span class="glyphicon glyphicon-log-in"></span> Đăng
+                            nhập
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav> 
