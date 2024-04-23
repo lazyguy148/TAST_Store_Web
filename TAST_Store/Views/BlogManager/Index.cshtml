@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+@model TAST_Store.ViewModels.BlogManagerViewModel
+<div class="panel panel-primary">
+
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Danh sách bài viết
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="text-align:center;font-weight:bold">
+                        <td>Titile</td>
+                        <td>Image</td>
+                        <td>Người đăng</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Blogs)
+                    {
+                        if (item.Hide == 0)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td><img class="img-rounded img-adv"  src="@item.Img" /></td>
+                                
+                                    @foreach(var user in Model.Users)
+                                    {
+                                    if(item.IdUsers == user.IdUsers)
+                                    {
+                                        <td>@user.Name</td>
+                                    }
+                                    }
+                                <td>
+                                    <button class="btn btn-danger" href="#">Xóa</button>
+                                    <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

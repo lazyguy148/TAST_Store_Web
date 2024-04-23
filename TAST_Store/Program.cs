@@ -60,6 +60,11 @@ app.UseEndpoints(endpoints =>
     defaults: new { controller = "User", action = "Login" });
 
     endpoints.MapControllerRoute(
+    name: "quan-tri",
+    pattern: "quan-tri",
+    defaults: new { controller = "Admin", action = "Index" });
+
+    endpoints.MapControllerRoute(
      name: "them-gio-hang",
      pattern: "them-gio-hang",
      defaults: new { controller = "Cart", action = "AddItem" });
@@ -105,9 +110,15 @@ app.UseEndpoints(endpoints =>
     defaults: new { controller = "Cart", action = "Delete" });
 
     endpoints.MapControllerRoute(
+    name: "quan-ly-bai-viet",
+    pattern: "quan-ly-bai-viet",
+    defaults: new { controller = "BlogManager", action = "Index" });
+
+    endpoints.MapControllerRoute(
     name: "quan-ly-tai-khoan",
     pattern: "quan-ly-tai-khoan",
     defaults: new { controller = "Account", action = "Index" });
+
 
     endpoints.MapControllerRoute(
        name: "the-loai-san-pham",

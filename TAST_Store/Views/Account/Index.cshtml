@@ -1,4 +1,7 @@
-﻿@model TAST_Store.ViewModels.AccountViewModel
+﻿@{
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+@model TAST_Store.ViewModels.AccountViewModel
 <div class="panel panel-primary">
 
     <div class="panel-heading panel-heading-prod">
@@ -24,18 +27,20 @@
                                 <td style="text-align:center">@item.IdUsers</td>
                                 <td>@item.Username</td>
                                 <td>@item.Name</td>
-                                <td><button class="btn btn-danger">Xóa</button></td>
+                                <td>
+                                    <button class="btn btn-danger" href="#">Xóa</button>
+                                    <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                                </td>
                             </tr>
                         }
                     }
                 </tbody>
             </table>
-            }
         </div>
     </div>
 </div>
 
-<div class="panel panel-primary">
+<div class="panel panel-danger">
 
     <div class="panel-heading panel-heading-prod">
         <i class="fa fa-spinner fa-spin"></i> Tài khoản Admin
@@ -48,6 +53,7 @@
                         <td>ID</td>
                         <td>Username</td>
                         <td>Họ tên</td>
+                        <td>Actions</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,13 +65,15 @@
                                 <td style="text-align:center">@item.IdUsers</td>
                                 <td>@item.Username</td>
                                 <td>@item.Name</td>
-                                <td><button class="btn btn-danger">Xóa</button></td>
+                                <td>
+                                    <button class="btn btn-danger" href="#">Xóa</button>
+                                    <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                                </td>
                             </tr>
                         }
                     }
                 </tbody>
             </table>
-            }
         </div>
     </div>
 </div>

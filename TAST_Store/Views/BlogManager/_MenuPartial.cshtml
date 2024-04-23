@@ -1,5 +1,5 @@
 ﻿@using System.Security.Claims
-@model TAST_Store.ViewModels.UserViewModel
+@model TAST_Store.ViewModels.BlogManagerViewModel
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -14,25 +14,14 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                @foreach (var item in Model.Menus)
-                {
-                    <li><a href="/@item.Link">@item.Title</a></li>
-                }
+                <li><a href="#">Quản lý sản phẩm</a></li>
+                <li><a href="quan-ly-tai-khoan">Quản lý tài khoản</a></li>
+                <li><a href="#">Quản lý bài viết</a></li>
             </ul>
-            
             <ul class="nav navbar-nav navbar-right">
                 @if (User.Identity.IsAuthenticated)
                 {
                     string username = User.Identity.Name;
-                    string permission = User.FindFirst(ClaimTypes.Role)?.Value;
-                    if (permission == "1")
-                    {
-                        <li><a href="quan-tri"><span class="glyphicon glyphicon-cog"></span></a></li>
-                    }
-                    else
-                    {
-                        <li><a href="gio-hang"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                    }
                     <li>
                         <a href="thong-tin">
                             <span class="glyphicon glyphicon-user"></span>
@@ -41,6 +30,22 @@
                     </li>
                     <li><a href="dang-xuat"><span class="glyphicon glyphicon-log-out"></span></a></li>
                 }
+                else
+                {
+                    <li>
+                        <a href="dang-ky">
+                            <span class="glyphicon glyphicon-user"></span> Đăng
+                            ký
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dang-nhap">
+                            <span class="glyphicon glyphicon-log-in"></span> Đăng
+                            nhập
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </nav> 
