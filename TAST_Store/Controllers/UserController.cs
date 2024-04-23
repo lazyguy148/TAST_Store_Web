@@ -61,8 +61,7 @@ namespace TAST_Store.Controllers
             };
             if (model.Register != null)
             {
-                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username ==
-               model.Register.Username);
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == model.Register.Username);
                 if (existingUser != null)
                 {
                     ViewBag.ErrorMessage = "Tên đăng nhập đã tồn tại.";

@@ -119,6 +119,15 @@ app.UseEndpoints(endpoints =>
     pattern: "quan-ly-tai-khoan",
     defaults: new { controller = "Account", action = "Index" });
 
+    endpoints.MapControllerRoute(
+     name: "quan-ly-loai-san-pham",
+     pattern: "quan-ly-loai-san-pham",
+     defaults: new { controller = "CatManager", action = "Index" });
+
+    endpoints.MapControllerRoute(
+     name: "quan-ly-san-pham",
+     pattern: "quan-ly-san-pham",
+     defaults: new { controller = "ProductManager", action = "Index" });
 
     endpoints.MapControllerRoute(
        name: "the-loai-san-pham",
@@ -130,16 +139,10 @@ app.UseEndpoints(endpoints =>
     pattern: "san-pham/{slug}-{id}",
     defaults: new { controller = "Product", action = "ProdDetail" });
 
-    
-
-
-
     endpoints.MapControllerRoute(
     name: "chuong-trinh",
     pattern: "chuong-trinh/{slug}",
     defaults: new { controller = "Product", action = "Index" });
-
-    
 
     endpoints.MapControllerRoute(
     name: "default",

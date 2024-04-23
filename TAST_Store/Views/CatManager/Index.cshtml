@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+@model TAST_Store.ViewModels.CatManagerViewModel
+<div class="panel panel-primary">
+
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Thêm mới loại sản phẩm
+    </div>
+
+    <div class="panel-body">
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <form class="form form-horizontal" asp-action="Index" asp-controller="ProductManager"
+              method="POST">
+            <div class="form-group">
+
+                <label asp-for="Cat.NameCat" class="col-md-3 control-label">Tên loại sản phẩm:</label>
+
+                <div class="col-md-9">
+                    <input class="form-control" asp-for="Cat.NameCat"
+                           placeholder="Nhập tên loại sản phẩm" autofocus required />
+
+                    <span asp-validation-for="Cat.NameCat" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cat.Link" class="col-md-3 control-label">link:</label>
+                <div class="col-md-9">
+                    <input class="form-control" asp-for="Cat.Link"
+                           placeholder="Nhập link loại sản phẩm " required />
+
+                    <span asp-validation-for="Cat.Link" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-danger">Thêm loại sản phẩm</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
