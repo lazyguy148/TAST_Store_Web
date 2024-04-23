@@ -32,11 +32,11 @@
                                 @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
                                          "{0:c}", item.Product.Price.GetValueOrDefault(0))
                             </td>
-                            <td style="textalign:center">
+                            <td style="text-align:center">
                                 @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
                                          "{0:c}", item.Product.Price.GetValueOrDefault(0) * item.Quantity)
                             </td>
-                            <td><button id="btnDelete" class="btn btn-danger" asp-controller="Cart" asp-action="Delete(@item.Product.IdPro)">Xoá</button></td>
+                            <td><button class="btn btn-danger btnDelete" data-id="@item.Product.IdPro">Xoá</button></td>
                         </tr>
                     }
                 </tbody>
@@ -48,10 +48,9 @@
         }
         else
         {
-            <div style="margin-top:10px;margin-bottom:10px;margin-left:auto; marginright:auto">
+            <div style="margin-top:10px;margin-bottom:10px;margin-left:auto; margin-right:auto">
                 <span class="alert alert-danger">
-                    Bạn chưa có sản phẩm nào trong giỏ
-                    hàng
+                    Bạn chưa có sản phẩm nào trong giỏ hàng
                 </span>
             </div>
         }
@@ -105,10 +104,17 @@
     document.getElementById("btnDeleteAll").addEventListener("click", DelateAllClick);
 </script>
 <script>
-    function DeleteOneClick(e) {
-        e.preventDefault();
+    document.querySelectorAll(".btnDelete").forEach(item => {
+        item.addEventListener("click", function (e) {
+            e.preventDefault();
+            var productId = this.getAttribute('data-id');
+            DeleteOneClick(productId);
+        });
+    });
+
+    function DeleteOneClick(productId) {
         $.ajax({
-            data: { id: $(this).data('id') },
+            data: { id: productId },
             url: '/Cart/Delete',
             dataType: 'json',
             type: 'POST',
@@ -119,14 +125,10 @@
             }
         })
     }
-    document.getElementById("btnDelete").addEventListener("click", DeleteOneClick);
 </script>
 <script>
-    function PaymentClick() {
+    document.getElementById("btnPayment").addEventListener("click", function () {
         window.location.href = "/thanh-toan";
-    }
-    document.getElementById("btnPayment").addEventListener("click", PaymentClick);
+    });
 </script>
-@section scripts {
-    <script src="~/js/cart.js"></script>
-}
+

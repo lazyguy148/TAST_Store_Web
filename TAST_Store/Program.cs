@@ -105,6 +105,11 @@ app.UseEndpoints(endpoints =>
     defaults: new { controller = "Cart", action = "Delete" });
 
     endpoints.MapControllerRoute(
+    name: "quan-ly-tai-khoan",
+    pattern: "quan-ly-tai-khoan",
+    defaults: new { controller = "Account", action = "Index" });
+
+    endpoints.MapControllerRoute(
        name: "the-loai-san-pham",
        pattern: "{slug}-{id}",
        defaults: new { controller = "Product", action = "CateProd" });
