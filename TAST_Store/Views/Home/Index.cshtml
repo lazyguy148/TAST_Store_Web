@@ -4,5 +4,9 @@
 }
 @await Html.PartialAsync("_SlidePartial")
 @await Html.PartialAsync("_ProductPartial")
-
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger intent="WELCOME"
+              chat-title="Hỗ_Trợ_Khách_Hàng"
+              agent-id="305511ac-935f-41d4-8ebd-09aab414baf6"
+              language-code="vi"></df-messenger>
 
