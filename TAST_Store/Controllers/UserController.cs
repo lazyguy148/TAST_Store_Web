@@ -21,9 +21,13 @@ namespace TAST_Store.Controllers
         [HttpGet]
         public async Task<IActionResult> Register()
         {
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m => m.Order).ToListAsync();
             var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>m.Order).Take(2).ToListAsync();
-            
             var viewModel = new UserViewModel
             {
                  Menus = menus,
@@ -35,6 +39,10 @@ namespace TAST_Store.Controllers
         [HttpGet]
         public async Task<IActionResult> Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>m.Order).ToListAsync();
             var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>m.Order).Take(2).ToListAsync();
             var viewModel = new UserViewModel
@@ -49,6 +57,11 @@ namespace TAST_Store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(UserViewModel model)
         {
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
            m.Order).ToListAsync();
             var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
@@ -82,6 +95,10 @@ namespace TAST_Store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
            m.Order).ToListAsync();
             var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
@@ -124,6 +141,7 @@ namespace TAST_Store.Controllers
             }
             return View(viewModel);
         }
+        
 
         public async Task<IActionResult> Info()
         {
@@ -141,12 +159,95 @@ namespace TAST_Store.Controllers
                     username);
                 }
             }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
             var viewModel = new UserViewModel
             {
                 Menus = menus,
                 Blogs = blogs,
                 Register = users,
             };
+            return View(viewModel);
+        }
+        [HttpGet]
+        public async Task<IActionResult> EditInfo()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m => m.Order).ToListAsync();
+            var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m => m.Order).Take(2).ToListAsync();
+            var users = new User();
+            if (User.Identity.IsAuthenticated)
+            {
+                string username = User.Identity.Name;
+                if (username != null)
+                {
+                    users = await _context.Users.FirstOrDefaultAsync(m => m.Username == username);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+            var viewModel = new UserViewModel
+            {
+                Menus = menus,
+                Blogs = blogs,
+                Register = users,
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditInfo(UserViewModel model)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
+           m.Order).ToListAsync();
+            var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
+           m.Order).Take(2).ToListAsync();
+            var users = model.Register;
+            if (User.Identity.IsAuthenticated)
+            {
+                string username = User.Identity.Name;
+                if (username != null)
+                {
+                    users = await _context.Users.FirstOrDefaultAsync(m => m.Username == username);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+            var viewModel = new UserViewModel
+            {
+                Menus = menus,
+                Blogs = blogs,
+                Register = users,
+            };
+            if (model.Register != null)
+            {
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == model.Register.Username);
+                if (existingUser != null)
+                {
+                    existingUser.Name = model.Register.Name;
+                    existingUser.Address = model.Register.Address;
+                    existingUser.Email = model.Register.Email;
+                    existingUser.Phone = model.Register.Phone;
+
+                    _context.Users.Update(existingUser);
+                    await _context.SaveChangesAsync();
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
             return View(viewModel);
         }
 

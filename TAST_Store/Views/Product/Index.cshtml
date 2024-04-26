@@ -11,7 +11,7 @@ spin"></i> Tất cả sản phẩm
         <div class="row">
             @foreach (var item in Model.Prods)
             {
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="thumbnail">
                         <img src="~/@item.Img1" class="img-rounded" alt="@item.NamePro" style="height: 235px;">
                         <div class="caption">
@@ -27,12 +27,38 @@ spin"></i> Tất cả sản phẩm
         </div>
     </div>
     <div class="panel-footer text-center">
-        <ul class="pagination pagination-centered">
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-        </ul>
+        @if (Model.TotalPages > 1)
+        {
+            int currentPage = Model.Page; 
+
+            <ul class="pagination justify-content-center">
+                @if (currentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Product", new { page = 1, pageSize = Model.PageSize })">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Product", new { page = currentPage - 1, pageSize = Model.PageSize })">Previous</a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Product", new { page = i, pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
+
+                @if (currentPage < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Product", new { page = currentPage + 1, pageSize = Model.PageSize })">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Product", new { page = Model.TotalPages, pageSize = Model.PageSize })">Last</a>
+                    </li>
+                }
+            </ul>
+        }
     </div>
 </div>
