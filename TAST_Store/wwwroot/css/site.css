@@ -96,6 +96,11 @@
 .main-image {
     width: 100%;
     height: auto;
+    transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.2);
 }
 
 .thumbnail {
@@ -106,4 +111,16 @@
 .thumbnail img {
     height: auto;
 }
+
+.sale-tag {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    background-color: red; 
+    color: white; 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    font-size: 12px;
+}
+
 

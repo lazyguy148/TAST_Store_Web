@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+@model TAST_Store.ViewModels.AccountViewModel
+<div class="panel panel-primary">
+
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Tạo tài khoản 
+    </div>
+
+    <div class="panel-body">
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <form class="form form-horizontal" asp-action="AddAccount" asp-controller="Account"
+              method="POST">
+            <div class="form-group">
+
+                <label asp-for="Acc.Name" class="col-md-3 control-label">Tên tài khoản:</label>
+
+                <div class="col-md-9">
+                    <input class="form-control" asp-for="Acc.Name"
+                           placeholder="Nhập tên tài khoản" autofocus required />
+
+                    <span asp-validation-for="Acc.Name" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Acc.Username" class="col-md-3 control-label">Tên đăng nhập:</label>
+                <div class="col-md-9">
+                    <input class="form-control" asp-for="Acc.Username"
+                           placeholder="Nhập tên đăng nhập" required />
+
+                    <span asp-validation-for="Acc.Username" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Acc.Password" class="col-md-3 control-label">Mật khẩu:</label>
+
+                <div class="col-md-9">
+                    <input class="form-control" asp-for="Acc.Password"
+                           placeholder="Nhập mật khẩu" required />
+
+                    <span asp-validation-for="Acc.Password" class="text-danger"></span>
+
+                </div>
+
+
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Acc.Permission" class="col-md-3 control-label">Quyền hạn:</label>
+
+                <div class="col-md-9">
+                    <select class="form-control" asp-for="Acc.Permission" required>
+                        @foreach(var item in Model.Permissions)
+                        {
+                            <option value="@item.IdPermission">@item.Permission1</option>
+                        }
+                    </select>
+
+                    <span asp-validation-for="Acc.Permission" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-danger">Tạo tài khoản</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

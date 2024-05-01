@@ -82,8 +82,7 @@ namespace TAST_Store.Controllers
         public IActionResult Delete(int id)
         {
             var sessionCart = JsonConvert.DeserializeObject<List<CartItem>>(HttpContext.Session.GetString(CartSession));sessionCart.RemoveAll(x => x.Product.IdPro == id);
-            HttpContext.Session.SetString(CartSession,
-            JsonConvert.SerializeObject(sessionCart));
+            HttpContext.Session.SetString(CartSession,JsonConvert.SerializeObject(sessionCart));
             return Json(new
             {
                 status = true

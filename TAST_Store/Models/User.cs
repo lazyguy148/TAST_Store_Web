@@ -24,6 +24,7 @@ namespace TAST_Store.Models
         public string? Link { get; set; }
         public int? Hide { get; set; }
 
+        public virtual Permission? PermissionNavigation { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
     }

@@ -20,9 +20,11 @@ namespace TAST_Store.Controllers
         public async Task<IActionResult> Index()
         {
             var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>m.Order).ToListAsync();
+            var cats = await _context.Catologies.Where(m=>m.Hide == 0).OrderBy(m => m.Order).ToListAsync();
             var viewModel = new ProductManagerViewModel
             {
                 Menus = menus,
+                Cats = cats
             };
             return View(viewModel);
         }

@@ -5,7 +5,7 @@
 <div class="panel panel-primary">
 
     <div class="panel-heading panel-heading-prod">
-        <i class="fa fa-spinner fa-spin"></i> Tài khoản khách
+        <i class="fa fa-spinner fa-spin"></i> Customer Accounts
     </div>
     <div class="panel-body">
         <div class="row">
@@ -28,7 +28,10 @@
                                 <td>@item.Username</td>
                                 <td>@item.Name</td>
                                 <td>
-                                    <button class="btn btn-danger" href="#">Xóa</button>
+                                    <form method="post" action="/Account/DeleteUser" onsubmit="return confirm('Bạn có chắc muốn xóa tài khoản này không?');">
+                                        <input type="hidden" name="userId" value="@item.IdUsers" />
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
                                     <button type="button" class="btn btn-success">Chỉnh sửa</button>
                                 </td>
                             </tr>
@@ -43,7 +46,7 @@
 <div class="panel panel-danger">
 
     <div class="panel-heading panel-heading-prod">
-        <i class="fa fa-spinner fa-spin"></i> Tài khoản Admin
+        <i class="fa fa-spinner fa-spin"></i> Admin Accounts
     </div>
     <div class="panel-body">
         <div class="row">
@@ -66,7 +69,10 @@
                                 <td>@item.Username</td>
                                 <td>@item.Name</td>
                                 <td>
-                                    <button class="btn btn-danger" href="#">Xóa</button>
+                                    <form method="post" action="/Account/DeleteUser" onsubmit="return confirm('Bạn có chắc muốn xóa tài khoản này không?');">
+                                        <input type="hidden" name="userId" value="@item.IdUsers" />
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
                                     <button type="button" class="btn btn-success">Chỉnh sửa</button>
                                 </td>
                             </tr>
@@ -77,3 +83,86 @@
         </div>
     </div>
 </div>
+
+<div class="panel panel-warning">
+
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Employee Accounts
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="text-align:center;font-weight:bold">
+                        <td>ID</td>
+                        <td>Username</td>
+                        <td>Họ tên</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Users)
+                    {
+                        if (item.Permission == 2)
+                        {
+                            <tr>
+                                <td style="text-align:center">@item.IdUsers</td>
+                                <td>@item.Username</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <form method="post" action="/Account/DeleteUser" onsubmit="return confirm('Bạn có chắc muốn xóa tài khoản này không?');">
+                                        <input type="hidden" name="userId" value="@item.IdUsers" />
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                    <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="panel  panel-success">
+
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Company Accounts
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="text-align:center;font-weight:bold">
+                        <td>ID</td>
+                        <td>Username</td>
+                        <td>Họ tên</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Users)
+                    {
+                        if (item.Permission == 3)
+                        {
+                            <tr>
+                                <td style="text-align:center">@item.IdUsers</td>
+                                <td>@item.Username</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <form method="post" action="/Account/DeleteUser" onsubmit="return confirm('Bạn có chắc muốn xóa tài khoản này không?');">
+                                        <input type="hidden" name="userId" value="@item.IdUsers" />
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                    <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

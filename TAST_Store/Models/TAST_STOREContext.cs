@@ -21,6 +21,7 @@ namespace TAST_Store.Models
         public virtual DbSet<CartDetail> CartDetails { get; set; } = null!;
         public virtual DbSet<Catology> Catologies { get; set; } = null!;
         public virtual DbSet<Menu> Menus { get; set; } = null!;
+        public virtual DbSet<Permission> Permissions { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Slider> Sliders { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
@@ -29,6 +30,7 @@ namespace TAST_Store.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+
                 optionsBuilder.UseSqlServer("Server=LAPTOP-5K30TST1\\SQLEXPRESS;Database=TAST_STORE;Trusted_Connection=True;TrustServerCertificate=true;");
             }
         }
@@ -213,6 +215,21 @@ namespace TAST_Store.Models
                     .HasColumnName("TITLE");
             });
 
+            modelBuilder.Entity<Permission>(entity =>
+            {
+                entity.HasKey(e => e.IdPermission);
+
+                entity.ToTable("PERMISSIONS");
+
+                entity.Property(e => e.IdPermission)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID_PERMISSION");
+
+                entity.Property(e => e.Permission1)
+                    .HasMaxLength(50)
+                    .HasColumnName("PERMISSION");
+            });
+
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.IdPro)
@@ -344,7 +361,7 @@ namespace TAST_Store.Models
                 entity.Property(e => e.Order).HasColumnName("ORDER");
 
                 entity.Property(e => e.Password)
-                    .HasMaxLength(20)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("PASSWORD");
 
@@ -359,6 +376,11 @@ namespace TAST_Store.Models
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasColumnName("USERNAME");
+
+                entity.HasOne(d => d.PermissionNavigation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.Permission)
+                    .HasConstraintName("FK_USERS_PERMISSIONS");
             });
 
             OnModelCreatingPartial(modelBuilder);

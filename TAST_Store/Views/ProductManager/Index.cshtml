@@ -59,10 +59,10 @@
 
                 <div class="col-md-9">
                     <select class="form-control" asp-for="Product.IdCat" required>
-                        <option value="1">Thời trang nam</option>
-                        <option value="2">Thời trang nữ</option>
-                        <option value="3">Quần nam</option>
-                        <option value="4">Quần nữ</option>
+                        @foreach(var item in Model.Cats)
+                        {
+                            <option value="@item.IdCat">@item.NameCat</option>
+                        }
                     </select>
 
                     <span asp-validation-for="Product.IdCat" class="text-danger"></span>
