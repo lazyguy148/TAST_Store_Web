@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TAST_Store.Models
 {
-    public partial class TAST_STOREContext : DbContext
+    public partial class TAST_STOREContext : IdentityDbContext<ApplicationUser>
     {
         public TAST_STOREContext()
         {
@@ -26,17 +27,20 @@ namespace TAST_Store.Models
         public virtual DbSet<Slider> Sliders { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
+       
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-
                 optionsBuilder.UseSqlServer("Server=LAPTOP-5K30TST1\\SQLEXPRESS;Database=TAST_STORE;Trusted_Connection=True;TrustServerCertificate=true;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Blog>(entity =>
             {
                 entity.HasKey(e => e.IdBlog)
@@ -280,8 +284,12 @@ namespace TAST_Store.Models
                 entity.Property(e => e.Order).HasColumnName("ORDER");
 
                 entity.Property(e => e.Price)
-                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnType("decimal(18, 2)")
                     .HasColumnName("PRICE");
+
+                entity.Property(e => e.Sale)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("SALE");
 
                 entity.HasOne(d => d.IdCatNavigation)
                     .WithMany(p => p.Products)

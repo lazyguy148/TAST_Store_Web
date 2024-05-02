@@ -21,15 +21,25 @@
         </div>
         <div class="col-md-6">
             <h2>@item.NamePro</h2>
-            <h4>
-                Giá gốc: <strike style="color:red;">
-                    @string.Format("{0:N0}",
-                             (float)item.Price) VNĐ
-                </strike>
-            </h4>
-            <h4>
-                Giá giảm sốc: <i style="font-weight: bold; color:green;">@string.Format("{0:N0}", (float)item.Price) VNĐ</i>
-            </h4>
+            @if (item.Sale != null)
+            {
+                <h4>
+                    Giá gốc: <strike style="color:red;">
+                        @string.Format("{0:N0}", item.Price) VNĐ
+                    </strike>
+                </h4>
+                <h4>
+                    Giá giảm sốc: <i style="font-weight: bold; color:green;">@string.Format("{0:N0}",item.Price - (item.Price * item.Sale)) VNĐ</i>
+                </h4>
+            }
+            else
+            {
+                <h4>
+                    Giá: <i style="font-weight: bold; color:green;">@string.Format("{0:N0}", item.Price) VNĐ</i>
+                </h4>
+            }
+
+            
             <h4>Các lựa chọn hiện có :</h4>
             <form class="form-horizontal">
                 <div class="form-group">

@@ -112,15 +112,42 @@
     height: auto;
 }
 
-.sale-tag {
-    position: absolute;
-    top: 10px; 
-    right: 10px; 
-    background-color: red; 
-    color: white; 
-    padding: 5px 10px; 
-    border-radius: 5px; 
-    font-size: 12px;
+@keyframes rainbow {
+    0% {
+        color: violet;
+    }
+
+    14% {
+        color: indigo;
+    }
+
+    28% {
+        color: blue;
+    }
+
+    42% {
+        color: green;
+    }
+
+    56% {
+        color: yellow;
+    }
+
+    70% {
+        color: orange;
+    }
+
+    84% {
+        color: red;
+    }
+
+    100% {
+        color: violet;
+    }
+    
+}
+.rainbow-text {
+    animation: rainbow 5s infinite; 
 }
 
 

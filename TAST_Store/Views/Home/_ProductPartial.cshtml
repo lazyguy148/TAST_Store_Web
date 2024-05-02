@@ -14,7 +14,14 @@
                         <img src="~/@item.Img1" class="img-rounded" alt="@item.NamePro" style="height: 235px;">
                         <div class="caption">
                             <h4>@item.NamePro</h4>
-                            <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            @if (item.Sale != null)
+                            {
+                                <p class="rainbow-text">Giá sale: @string.Format("{0:N0}", item.Price - (item.Price * item.Sale)) VNĐ</p>
+                            }
+                            else
+                            {
+                                <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            }
                             <p>
                                 <a href="san-pham/@item.Link-@item.IdPro" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
                             </p>
@@ -46,7 +53,14 @@
                         <img src="~/@item.Img1" class="img-rounded" alt="@item.NamePro" style="height: 235px;">
                         <div class="caption">
                             <h4>@item.NamePro</h4>
-                            <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            @if (item.Sale != null)
+                            {
+                                <p class="rainbow-text">Giá sale: @string.Format("{0:N0}", item.Price - (item.Price * item.Sale)) VNĐ</p>
+                            }
+                            else
+                            {
+                                <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            }
                             <p>
                                 <a href="san-pham/@item.Link-@item.IdPro" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
                             </p>
@@ -78,7 +92,14 @@
                         <img src="~/@item.Img1" class="img-rounded" alt="@item.NamePro" style="height: 235px;">
                         <div class="caption">
                             <h4>@item.NamePro</h4>
-                            <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            @if (item.Sale != null)
+                            {
+                                <p class="rainbow-text">Giá sale: @string.Format("{0:N0}", item.Price - (item.Price * item.Sale)) VNĐ</p>
+                            }
+                            else
+                            {
+                                <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            }
                             <p>
                                 <a href="san-pham/@item.Link-@item.IdPro" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
                             </p>
@@ -110,7 +131,14 @@
                         <img src="~/@item.Img1" class="img-rounded" alt="@item.NamePro" style="height: 235px;">
                         <div class="caption">
                             <h4>@item.NamePro</h4>
-                            <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            @if (item.Sale != null)
+                            {
+                                <p class="rainbow-text">Giá sale: @string.Format("{0:N0}", item.Price - (item.Price * item.Sale)) VNĐ</p>
+                            }
+                            else
+                            {
+                                <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            }
                             <p>
                                 <a href="san-pham/@item.Link-@item.IdPro" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
                             </p>

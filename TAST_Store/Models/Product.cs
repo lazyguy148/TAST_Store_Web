@@ -23,6 +23,7 @@ namespace TAST_Store.Models
         public string? Link { get; set; }
         public int? Hide { get; set; }
         public int? IdCat { get; set; }
+        public decimal? Sale { get; set; }
 
         public virtual Catology? IdCatNavigation { get; set; }
         public virtual ICollection<CartDetail> CartDetails { get; set; }
