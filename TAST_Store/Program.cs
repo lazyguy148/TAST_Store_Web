@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -13,15 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 var connectionString = "Server=LAPTOP-5K30TST1\\SQLEXPRESS;Database=TAST_STORE;Trusted_Connection=True;TrustServerCertificate=true;";
 builder.Configuration.GetConnectionString("TAST_STOREConnection");
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-       .AddEntityFrameworkStores< TAST_STOREContext>().AddDefaultTokenProviders();
 builder.Services.AddDbContext<TAST_STOREContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
  .AddDefaultTokenProviders()
  .AddDefaultUI()
  .AddEntityFrameworkStores<TAST_STOREContext>();
 
 builder.Services.AddRazorPages();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
 AddCookie(options =>
 {
@@ -49,7 +48,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
-
+app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
@@ -82,12 +81,10 @@ app.UseEndpoints(endpoints =>
     pattern: "quan-tri",
     defaults: new { controller = "Admin", action = "Index" });
 
-
     endpoints.MapControllerRoute(
      name: "them-gio-hang",
      pattern: "them-gio-hang",
      defaults: new { controller = "Cart", action = "AddItem" });
-
 
     endpoints.MapControllerRoute(
     name: "thong-tin",
